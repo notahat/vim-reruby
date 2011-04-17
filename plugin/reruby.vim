@@ -3,10 +3,11 @@
 " Maintainer:	 Pete Yandell <pete@notahat.com>
 " License:     See LICENSE
 
-if exists("g:loaded_reruby") || &cp
+if exists("g:loaded_reruby") || &compatible || !has("ruby")
   finish
 endif
 let g:loaded_reruby = 1
+
 let s:keepcpo       = &cpo
 set cpo&vim
 
