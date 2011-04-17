@@ -1,3 +1,15 @@
+" Vim global plugin for correcting typing mistakes
+" Last Change: 2011 Apr 18
+" Maintainer:	 Pete Yandell <pete@notahat.com>
+" License:     See LICENSE
+
+if exists("g:loaded_reruby") || &cp
+  finish
+endif
+let g:loaded_reruby = 1
+let s:keepcpo       = &cpo
+set cpo&vim
+
 ruby << EOF
   path = VIM.evaluate %{expand("<sfile>")}
   dir  = File.dirname(path)
@@ -15,3 +27,6 @@ EOF
 endfunction
 
 command! -range -nargs=1 ExtractMethod :<line1>,<line2>call ExtractMethod(<f-args>)
+
+let &cpo= s:keepcpo
+unlet s:keepcpo
