@@ -36,12 +36,3 @@ describe Reruby::MethodExtractor do
   end
   
 end
-
-
-
-
-function! MyFunction(name) range
-  ruby MyModule.my_function(a:firstline, a:lastline, a:method_name)
-endfunction
-
-command --range -nargs=1 ExtractMethod :call ExtractMethod(<f-args>)
