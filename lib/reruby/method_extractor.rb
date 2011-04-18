@@ -43,26 +43,44 @@ module Reruby
     def indent(depth, lines)
       case lines
         when Array
-          lines.map {|line| indent(depth, line) }
+          indent_multiple_lines(depth, lines)
         else
-          indent = " "*depth
-          lines == "" ? "" : "#{indent}#{lines}"
+          indent_one_line(depth, lines)
       end
     end
 
     def unindent(depth, lines)
       case lines
         when Array
-          lines.map {|line| unindent(depth, line) }
+          unindent_multiple_lines(depth, lines)
         else
-          indent = " "*depth
-          lines.sub(/^#{indent}/, "")
+          unindent_one_line(depth, lines)
       end
     end
       
     def reindent(new_depth, lines)
       original_depth = measure_indent(lines.first)
       indent(new_depth, unindent(original_depth, lines))
+    end
+
+  private
+
+    def indent_one_line(depth, line)
+      indent = " "*depth
+      line == "" ? "" : "#{indent}#{line}"
+    end
+
+    def indent_multiple_lines(depth, lines)
+      lines.map {|line| indent_one_line(depth, line) }
+    end
+    
+    def unindent_one_line(depth, line)
+      indent = " "*depth
+      line.sub(/^#{indent}/, "")
+    end
+
+    def unindent_multiple_lines(depth, lines)
+      lines.map {|line| unindent_one_line(depth, line) }
     end
 
   end
