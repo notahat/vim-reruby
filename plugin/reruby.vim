@@ -1,4 +1,4 @@
-" Vim global plugin for correcting typing mistakes
+" Vim plugin for simple ruby refactorings
 " Last Change: 2011 Apr 18
 " Maintainer:	 Pete Yandell <pete@notahat.com>
 " License:     See LICENSE
