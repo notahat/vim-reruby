@@ -42,4 +42,16 @@ describe Reruby::BetterBuffer do
     end
   end
 
+  describe "append" do
+    it "appends a single line" do
+      @better_buffer.append(1, "q")
+      @vim_buffer.to_s.should == "a\nq\nb\nc\nd\n"
+    end
+
+    it "appends multiple lines" do
+      @better_buffer.append(1, ["q", "r"])
+      @vim_buffer.to_s.should == "a\nq\nr\nb\nc\nd\n"
+    end
+  end
+
 end
