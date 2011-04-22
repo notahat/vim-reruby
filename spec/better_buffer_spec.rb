@@ -3,26 +3,30 @@ require 'support/fake_buffer'
 
 describe Reruby::BetterBuffer do
 
-  describe ".[]" do
-    before do
-      vim_buffer = FakeBuffer.new <<-EOF
-        a
-        b
-        c
-        d
-      EOF
-      @buffer = Reruby::BetterBuffer.new(vim_buffer)
-    end
+  before do
+    @vim_buffer    = FakeBuffer.new("a\nb\nc\nd\n")
+    @better_buffer = Reruby::BetterBuffer.new(@vim_buffer)
+  end
     
+  describe "[]" do
     it "returns a single line" do
-      @buffer[2].should == "        b"
+      @better_buffer[2].should == "b"
     end
 
     it "returns a range of lines" do
-      @buffer[2..3].should == [
-        "        b",
-        "        c"
-      ]
+      @better_buffer[2..3].should == ["b", "c"]
+    end
+  end
+
+  describe "[]=" do
+    it "replaces a single line" do
+      @better_buffer[2] = "q"
+      @vim_buffer.to_s.should == "a\nq\nc\nd\n"
+    end
+
+    it "replaces multiple lines" do
+      @better_buffer[2..3] = ["q", "r", "s"]
+      @vim_buffer.to_s.should == "a\nq\nr\ns\nd\n"
     end
   end
 

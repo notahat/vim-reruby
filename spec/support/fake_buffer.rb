@@ -7,6 +7,10 @@ class FakeBuffer
     @lines[n - 1]
   end
 
+  def []=(n, line)
+    @lines[n - 1] = line
+  end
+
   def delete(n)
     @lines.delete_at(n - 1)
   end
