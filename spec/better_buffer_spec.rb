@@ -30,4 +30,16 @@ describe Reruby::BetterBuffer do
     end
   end
 
+  describe "delete" do
+    it "deletes a single line" do
+      @better_buffer.delete(2)
+      @vim_buffer.to_s.should == "a\nc\nd\n"
+    end
+
+    it "deletes multiple lines" do
+      @better_buffer.delete(2..3)
+      @vim_buffer.to_s.should == "a\nd\n"
+    end
+  end
+
 end
