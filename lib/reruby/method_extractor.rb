@@ -29,6 +29,8 @@ module Reruby
 
   private
 
+    # TODO: Extract a lot of this stuff into somewhere testable.
+    
     def grep_backwards_from(line, regexp)
       until @buffer[line] =~ regexp
         line -= 1
@@ -62,8 +64,6 @@ module Reruby
       original_depth = measure_indent(lines.first)
       indent(new_depth, unindent(original_depth, lines))
     end
-
-  private
 
     def indent_one_line(depth, line)
       indent = " "*depth
