@@ -1,7 +1,14 @@
 class FakeBuffer
   def initialize(contents)
-    @lines = contents.split("\n")
+    @lines = case contents
+      when String
+        contents.split("\n")
+      when Array
+        contents
+    end
   end
+
+  attr_reader :lines
 
   def [](n)
     @lines[n - 1]
