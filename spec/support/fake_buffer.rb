@@ -1,3 +1,4 @@
+# This class mimics the API of the VIM::Buffer class, for testing.
 class FakeBuffer
   def initialize(contents)
     @lines = case contents
@@ -9,6 +10,12 @@ class FakeBuffer
   end
 
   attr_reader :lines
+
+  def to_s
+    @lines.join("\n") + "\n"
+  end
+
+  # Methods provided by VIM::Buffer:
 
   def [](n)
     @lines[n - 1]
@@ -26,7 +33,4 @@ class FakeBuffer
     @lines.insert(n, str)
   end
 
-  def to_s
-    @lines.join("\n") + "\n"
-  end
 end
